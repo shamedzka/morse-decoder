@@ -35,16 +35,16 @@ const MORSE_TABLE = {
     '---..': '8',
     '----.': '9',
     '-----': '0',
+    '**********': ' '
 };
 
 function decode(expr) {
     const arr = expr.match(/.{1,10}/g);
     let str = arr.join(',');
-    let newExpr = str.replace(/\*\*\*\*\*\*\*\*\*\*/g, '*');
     let nothing = /00/gi;
     let dots = /10/gi;
     let dashes = /11/gi;
-    let newNothing = newExpr.replace(nothing, '');
+    let newNothing = str.replace(nothing, '');
     let newDots = newNothing.replace(dots, '.');
     let newDashes = newDots.replace(dashes, '-');
     let newArr = newDashes.split(',');
@@ -57,8 +57,7 @@ function decode(expr) {
         }
     }
     let finalstr = lastArr.join('');
-    let lastStr = finalstr.replace(/\*/g, ' ');
-    return lastStr;
+    return finalstr;
 }
 
 module.exports = {
